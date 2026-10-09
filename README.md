@@ -2,6 +2,8 @@
 
 # push_swap
 
+[![CI](https://github.com/Ranran-bagel/42_push_swap/actions/workflows/ci.yml/badge.svg)](https://github.com/Ranran-bagel/42_push_swap/actions/workflows/ci.yml)
+
 ## Description
 
 `push_swap` は 2 つのスタック (`a`, `b`) と限られた操作セットだけで整数列を昇順ソートするプロジェクトです。本リポジトリはバイナリ `push_swap`（ソートに必要な操作列を標準出力に表示）と、ボーナスの `checker`（与えられた操作列がスタックを正しくソートするか検証）の 2 つを提供します。
