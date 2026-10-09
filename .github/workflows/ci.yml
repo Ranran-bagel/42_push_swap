@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build push_swap
+        run: make
+
+      - name: Build checker
+        run: make bonus
+
+      - name: Test small inputs
+        run: |
+          for ARG in \
+            "2 1" \
+            "3 2 1" \
+            "5 1 4 2 3" \
+            "-3 10 0 -8 5"
+          do
+            RESULT=$(./push_swap $ARG | ./checker $ARG)
+            echo "$ARG -> $RESULT"
+            test "$RESULT" = "OK"
+          done
+
+      - name: Test random 100-number inputs
+        run: |
+          for i in $(seq 1 10); do
+            ARG=$(shuf -i 1-10000 -n 100 | tr '\n' ' ')
+            RESULT=$(./push_swap $ARG | ./checker $ARG)
+            echo "Run $i: $RESULT"
+            test "$RESULT" = "OK"
+          done
+
+      - name: Test random 500-number inputs
+        run: |
+          for i in $(seq 1 5); do
+            ARG=$(shuf -i 1-100000 -n 500 | tr '\n' ' ')
+            RESULT=$(./push_swap $ARG | ./checker $ARG)
+            echo "Run $i: $RESULT"
+            test "$RESULT" = "OK"
+          done
+
+      - name: Clean
+        run: make fclean
