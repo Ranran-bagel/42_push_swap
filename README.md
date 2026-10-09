@@ -8,6 +8,15 @@
 
 許可されている操作: `sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, `rrr`
 
+## Performance
+
+Benchmark results across **200 randomly generated inputs** for each input size, using the default adaptive strategy.
+
+| Input Size | Average Operations | Min | Max |
+|------------|-------------------:|----:|----:|
+| 100        | 935                | 754 | 1,084 |
+| 500        | 7,542              | 6,784 | 8,442 |
+
 ## Instructions
 
 ### Build
